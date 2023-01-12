@@ -19,8 +19,7 @@ describe('test with backend', () => {
         cy.get('[formcontrolname="body"]').type('Body')
         cy.get('[type="button"]').click()
 
-        cy.wait('@postArticles')
-        cy.get('@postArticles').then(xhr=> {
+        cy.wait('@postArticles').then(xhr=> {
             console.log(xhr)
             expect(xhr.response.statusCode).to.equal(200)
             expect(xhr.request.body.article.body).to.equal('Body')
