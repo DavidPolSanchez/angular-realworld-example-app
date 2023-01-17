@@ -28,7 +28,7 @@ describe('test with backend', () => {
             expect(xhr.response.body.article.description).to.equal('question')
         })
     })
-    it.only('2.verify popular tags are displayed', ()=>{
+    it('2.verify popular tags are displayed', ()=>{
         console.log('we log in successfully')
         cy.get('.tag-list')
         .should('contain','Cypress')
@@ -50,8 +50,15 @@ describe('test with backend', () => {
             expect(btnheartList[1]).to.contain('5')
 
         })
+
+        cy.fixture('articles.json').then( file => {
+            const articleLink= file.articles[1].slug
+            file.articles[1].favoritesCount = 6 
+            cy.intercept('POST','https://api.realworld.io/api/articles/'+articleLink+'/favorite',file)
+            
+        })
+
+        cy.get('app-article-list button').eq(1).click().should('contain','6')
+        
     })
-
-
-
 })
