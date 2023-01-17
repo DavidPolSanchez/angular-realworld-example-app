@@ -40,6 +40,18 @@ describe('test with backend', () => {
 
     })
 
+    it.only('verify global feed article likes', () =>{
+        cy.intercept('GET','https://api.realworld.io/api/articles/feed*',{"articles":[],"articlesCount":0})
+        cy.intercept('GET','https://api.realworld.io/api/articles*',{fixture:'articles.json'})
+
+        cy.contains('Global Feed').click()
+        cy.get('app-article-list button').then(btnheartList =>{
+            expect(btnheartList[0]).to.contain('1')
+            expect(btnheartList[1]).to.contain('5')
+
+        })
+    })
+
 
 
 })
