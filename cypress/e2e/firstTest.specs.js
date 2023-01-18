@@ -40,7 +40,7 @@ describe('test with backend', () => {
 
     })
 
-    it.only('verify global feed article likes', () =>{
+    it('verify global feed article likes', () =>{
         cy.intercept('GET','https://api.realworld.io/api/articles/feed*',{"articles":[],"articlesCount":0})
         cy.intercept('GET','https://api.realworld.io/api/articles*',{fixture:'articles.json'})
 
@@ -61,4 +61,36 @@ describe('test with backend', () => {
         cy.get('app-article-list button').eq(1).click().should('contain','6')
         
     })
+
+    it.only('delete new artcile on global feed api insert data',()=>{
+        const credentials = {
+            "user": {
+                "email": "davidpolsanchezmartos@gmail.com",
+                "password": "caracoles"
+            }
+        }
+        const bodyRequest  = {
+            "article": {
+                "tagList": [],
+                "title": "Hola campeon",
+                "description": "ieieie",
+                "body": "funcioné"
+            }
+        }
+
+        cy.request('POST','https://conduit.productionready.io/api/users/login',credentials)
+        .its('body').then( body => {
+            const token = body.user.token    
+
+            cy.request({
+                url: 'https://conduit.productionready.io/api/articles/',
+                headers: {'Authorization': 'Token ' + token},
+                method:'POST',
+                body:bodyRequest,
+                
+
+            })
+        })
+    })
+
 })
