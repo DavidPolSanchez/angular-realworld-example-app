@@ -3,6 +3,10 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   viewportHeight:1080,
   viewportWidth:1920,
+  reporter:"cypress-multi-reporters",
+  reporterOptions:{
+    configfile:"reporter-config.json"
+  },
   env:{
     username:'davidpolsanchezmartos@gmail.com',
     password:'caracoles',
