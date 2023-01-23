@@ -9,11 +9,10 @@
     "test": "ng test",
     "lint": "ng lint --force",
     "e2e": "ng e2e",
-    "cypress:run":"npx cypress run",
-    "cypress:e2e":"start-test start http-get://localhost:4200 cypress:run",
-
-    "cy:open_dev":"npx cypress open --env username=davidpolsanchezmartos@gmail.com,password=caacoles",
-    "cy:open_process":"npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD"
+    "cypress:run": "npx cypress run",
+    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
+    "cy:open_dev": "npx cypress open --env username=davidpolsanchezmartos@gmail.com,password=caacoles",
+    "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD"
   },
   "pre-commit": [
     "lint"
@@ -44,6 +43,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.1",
     "cypress": "^12.3.0",
+    "cypress-multi-reporters": "^1.6.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -52,6 +52,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "mocha-junit-reporter": "^2.2.0",
     "pre-commit": "^1.2.2",
     "protractor": "~7.0.0",
     "start-server-and-test": "^1.15.2",
