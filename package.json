@@ -18,7 +18,9 @@
     "cypress:run": "npx cypress run",
     "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "cy:open_dev": "npx cypress open --env username=davidpolsanchezmartos@gmail.com,password=caracoles",
-    "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD"
+    "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD",
+
+    "cy:run_spec":"npx cypress run --spec 'cypress/e2e/firstTest.specs.js' --browser chrome"
   },
   "pre-commit": [
     "lint"
