@@ -13,6 +13,15 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // e2e testing node events setup code
+      // const username = process.env.DB_USERNAME
+      // const password = process.env.DB_PASSWORD
+
+      // //comndition check
+      // if(!password){
+      //   throw new Error('missing PASSWORD environment variable')
+      // }
+      // config.env= {username,password}
+      // return config
     },
     baseUrl: 'http://localhost:4200',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
