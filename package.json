@@ -8,7 +8,12 @@
     "build": "ng build --prod  --base-href ./ && cp CNAME dist/CNAME",
     "test": "ng test",
     "lint": "ng lint --force",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cypress:run":"npx cypress run",
+    "cypress:e2e":"start-test start http-get://localhost:4200 cypress:run",
+
+    "cy:open_dev":"npx cypress open --env username=davidpolsanchezmartos@gmail.com,password=caacoles",
+    "cy:open_process":"npx cypress open --env username=$DB_USERNAME,password=$DB_PASSWORD"
   },
   "pre-commit": [
     "lint"
