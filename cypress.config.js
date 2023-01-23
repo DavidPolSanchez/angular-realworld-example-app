@@ -6,7 +6,8 @@ module.exports = defineConfig({
   env:{
     username:'davidpolsanchezmartos@gmail.com',
     password:'caracoles',
-    baseUrl:'https://api.realworld.io'
+    apiUrlrealWorld:'https://api.realworld.io',
+    apiUrlconduit:'https://conduit.productionready.io'
   },
   retries:1,
   e2e: {
