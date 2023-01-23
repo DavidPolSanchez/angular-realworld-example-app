@@ -9,7 +9,10 @@ module.exports = defineConfig({
     apiUrlrealWorld:'https://api.realworld.io',
     apiUrlconduit:'https://conduit.productionready.io'
   },
-  retries:1,
+  retries:{
+    runMode: 2,
+    openMode: 0
+  },
   e2e: {
     setupNodeEvents(on, config) {
       // e2e testing node events setup code
