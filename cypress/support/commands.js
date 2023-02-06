@@ -25,21 +25,30 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('loginToApplication', () => { 
-    cy.visit('/login')
-    cy.get('[placeholder="Email"]').type('davidpolsanchezmartos@gmail.com')
-    cy.get('[placeholder="Password"]').type('caracoles')
-    cy.get('form').submit()
+    const credentials = {
+        "user": {
+            "email": Cypress.env("username"),
+            "password": Cypress.env("password")
+        }
+    }
+    cy.request('POST',Cypress.env("apiUrlconduit")+'/api/users/login',credentials)
+    .its('body').then(body=> {
+        const token = body.user.token  
+        cy.wrap(token).as('token')
+        cy.visit('/',{
+            onBeforeLoad (win){
+                win.localStorage.setItem('jwtToken', token)
+            }
+        })
+    })
 
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+    // cy.visit('/login')
+    // cy.get('[placeholder="Email"]').type('davidpolsanchezmartos@gmail.com')
+    // cy.get('[placeholder="Password"]').type('caracoles')
+    // cy.get('form').submit()
+
+
 
 
 })

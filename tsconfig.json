@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "http://localhost:4200",
     "importHelpers": true,
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
@@ -20,3 +21,4 @@
     ]
   }
 }
+

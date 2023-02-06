@@ -62,13 +62,8 @@ describe('test with backend', () => {
         
     })
 
-    it.only('delete new artcile on global feed api insert data',()=>{
-        const credentials = {
-            "user": {
-                "email": "davidpolsanchezmartos@gmail.com",
-                "password": "caracoles"
-            }
-        }
+    it.only('delete new artcile on global (feed insert data)',()=>{
+        
         const bodyRequest  = {
             "article": {
                 "tagList": [],
@@ -78,16 +73,27 @@ describe('test with backend', () => {
             }
         }
 
-        cy.request('POST','https://conduit.productionready.io/api/users/login',credentials)
-        .its('body').then( body => {
-            const token = body.user.token    
-
+        cy.get('@token').then( token => {
             cy.request({
                 url: 'https://conduit.productionready.io/api/articles/',
                 headers: {'Authorization': 'Token ' + token},
                 method:'POST',
-                body:bodyRequest,
+                body:bodyRequest
+            }).then(response=>{
+                expect(response.status).to.equal(200)
+            })
+            cy.contains('Global Feed').click()
+            cy.get('.article-preview').first().click()
+            cy.get('.article-actions').contains('Delete Article').click()
+
+            cy.request({
+                url: 'https://conduit.productionready.io/api/articles/',
+                headers: {'Authorization': 'Token ' + token},
+                method:'GET',
                 
+
+            }).its('body').then(bodyResponse=>{
+                expect(bodyResponse.articles[0].title).not.to.equal('Hola campeon')
 
             })
         })
